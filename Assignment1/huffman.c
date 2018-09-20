@@ -9,7 +9,7 @@
 /* ==========
 // current progress:
 !!!perfectly done encoding
-!!!done encoding
+!!!perfectly done decoding
 !!!done search
 === SUBMIT
 =========== */
