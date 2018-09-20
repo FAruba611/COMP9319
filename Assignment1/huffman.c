@@ -2,7 +2,7 @@
  * Description: COMP9319 Assignment 1
  * Author: Changfeng LI(Frank)(z5137858)
  * file: huffman.c
- * Recentlu Updated: 2018-08-24 19:10
+ * Recently Updated: 2018-08-24 19:10
  * Version: 2.0
  * ---------------------------------------*/
 
@@ -210,7 +210,6 @@ void generateTree() {
     // Step1: realloc space
     // 2n - 1 many nodes overall + node at index 0 is always a empty node = 2n, this is useful for computing
     nodes = (NodeT *) calloc(2 * nb_feat_appear, sizeof(NodeT));
-    //printArray(nodes);
     // Step2: add all child nodes
     for (i = 0; i < SIZE_ALPHABET; ++i) {
         curr_freq = freq[i];
@@ -222,14 +221,12 @@ void generateTree() {
     }
 
     // Step3: add parent nodes to build tree
-    //printArray(nodes); // nodes array [(,),(,),...]
 
     while (cursor < nb_nodes) {
         il = cursor;
-	    cursor++;
+	cursor++;
         ir = cursor;
-	    cursor++;
-        ////printf("===> free index = %d a = %d // b = %d\n", free_index, il, ir);
+	cursor++;
         curr_freq = nodes[il].weight + nodes[ir].weight;
         tag = -(ir/2);
         createNode(tag, curr_freq, il, ir);
@@ -237,7 +234,6 @@ void generateTree() {
     }
     //printArray(nodes);
     //displayTree(&nodes[num_nodes], 0);
-    ////printf("%d\n", num_nodes);
 
 }
 
@@ -262,7 +258,6 @@ void createNode(int index, int weight, int index_lchild, int index_rchild) {
         nodes[j].lchild = &nodes[index_lchild];
         nodes[j].rchild = &nodes[index_rchild];
     }
-
 }
 
 // ================================
@@ -368,7 +363,6 @@ void getCodes(NodeT *btroot, unsigned int code_arr[], char bit_arr[], int depth)
         hashTableInsert((unsigned char)(btroot->index), g, depth);
 
     }
-
 }
 
 
@@ -391,7 +385,6 @@ short huffman_decoder(const char *i_f, const char *o_f) {
 
     //printf("\n3.decode and gen original file------\n\n");
     huffmanDecoding(fi, fo, 'o'); //writeOutputFile(fi, fo, 'o');
-
 
     fclose(fi);
     fclose(fo);
@@ -526,7 +519,6 @@ int readInputFile(FILE *f) {
             original_size+=freq[ascii_index];
 
         }
-
         ascii_index++;
 
     }
@@ -621,9 +613,7 @@ int writeOutputFile(FILE *fi, FILE *fo, char file_class) {
     		    NodeH *code = NULL;
 
     		    code = hashTableFindItem(curr_char);
-    		    ////printf("+++++++\n");
-    		    ////printArrayInt(code->codeArr, code->codeLen);
-    		    ////printf("-------\n");
+    		    
     		    while (l++<code->codeLen) {
 
     			    writeBit(fo, code->codeArr[l-1], 'w'); //write bit
@@ -717,7 +707,6 @@ void printArrayNodeT(NodeT *array) {
     printf("[");
     int j = 0;
     for(j = 0; j <= nb_nodes; j++) {
-        //printf("(%d, %d), ", array[j].index, array[j].weight);
         printf("(%d, %d), ", array[j].index, array[j].weight);
     }
     printf("]\n");
@@ -732,9 +721,9 @@ void printArrayInt(int *array, int len) {
     printf("[");
     int j = 0;
     for(j = 0; j < len; j++) {
-        printf("%d, ", array[j]);
+        printf("\033[33m%d, ", array[j]);
     }
-    printf("]\n");
+    printf("\033[0m]\n");
 }
 
 /***************
