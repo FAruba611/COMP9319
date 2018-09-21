@@ -99,6 +99,7 @@ char ch_global;
 NodeH* hashTable[SIZE_ALPHABET]; //hash table data strcutrue
 int hash_table_size;  //the number of key-value pairs in the hash table!
 
+
 /*--------------------------------------------------------*/
 /*                 Function Declaration                   */
 /*--------------------------------------------------------*/
