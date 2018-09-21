@@ -148,7 +148,7 @@ void initSys() {
 }
 
 // ==================
-// Function: finalise
+// Function: drop
 //
 // ==================
 void dropSys() {
@@ -635,14 +635,11 @@ int writeOutputFile(FILE *fi, FILE *fo, char file_class) {
 }
 
 
-
 //============ hash fundamental
-void hashTableInsert(const unsigned char skey, unsigned int* codearr, unsigned int codelen)
-{
+void hashTableInsert(const unsigned char skey, unsigned int* codearr, unsigned int codelen) {
     ////printf("--- start insert---\n");
 
-    if(hash_table_size >= SIZE_ALPHABET)
-    {
+    if(hash_table_size >= SIZE_ALPHABET) {
         printf("run out of hash table memory!\n");
         return;
     }
@@ -662,14 +659,11 @@ void hashTableInsert(const unsigned char skey, unsigned int* codearr, unsigned i
 
 }
 
-
-NodeH* hashTableFindItem(const unsigned char skey)
-{
+NodeH* hashTableFindItem(const unsigned char skey) {
     unsigned short pos = (unsigned short)skey;
     NodeH* pHead = hashTable[pos];
 
-    if(hashTable[pos])
-    {
+    if(hashTable[pos]) {
         if(pHead->sKey == skey) {
             return pHead;
         }
@@ -677,18 +671,13 @@ NodeH* hashTableFindItem(const unsigned char skey)
     return NULL;
 }
 
-
-void hashFree()
-{
+void hashFree() {
     int pos;
-    for(pos = 0; pos < SIZE_ALPHABET; ++pos)
-    {
-        if(hashTable[pos])
-        {
+    for(pos = 0; pos < SIZE_ALPHABET; ++pos) {
+        if(hashTable[pos]) {
             NodeH* pHead = hashTable[pos];
             NodeH* pTemp = pHead;
-            if(pTemp)
-            {
+            if(pTemp) {
                 free(pTemp);
             }
         }
@@ -698,7 +687,6 @@ void hashFree()
 
 //===============================
 // useful helper function
-
 /***************
  * function: print node array
  ***************/
@@ -730,17 +718,15 @@ void printArrayInt(int *array, int len) {
 /***************
  * function: print hashtable
  ***************/
-void printHash()
-{
+void printHash() {
     printf("===========content of hash table=================\n");
     int i;
     for(i = 0; i < SIZE_ALPHABET; ++i)
 
-        if(hashTable[i])
-        {
+        if(hashTable[i]) {
             printf("%d=>", i);
             printf("%c:", hashTable[i]->sKey);
-	        int j=0;
+	    int j=0;
             for(j=0;j<hashTable[i]->codeLen;j++) {
                 printf("%d, ", hashTable[i]->codeArr[j]);
             }
@@ -751,31 +737,24 @@ void printHash()
 /***************
  * function: print btree
  ***************/
-
-void displayTree(NodeT * btroot, int identity)
-{
-    if(identity > 0)
-    {
+void displayTree(NodeT * btroot, int identity) {
+    if(identity > 0) {
         int i =0;
-	for(i = 0; i < identity - 1; ++i)
-        {
+	for(i = 0; i < identity - 1; ++i) {
             printf(vec_left[i] ? "│   " : "    ");
         }
         printf(vec_left[identity-1] ? "├── " : "└── ");
     }
 
-    if(! btroot)
-    {
+    if(! btroot) {
         printf("(null)\n");
         return;
     }
 
     printf("%d\n", btroot->weight);
-    if(!btroot->lchild && !btroot->rchild)
-    {
+    if(!btroot->lchild && !btroot->rchild) {
         return;
     }
-
     vec_left[identity] = 1;
     displayTree(btroot->lchild, identity + 1);
     vec_left[identity] = 0;
@@ -802,7 +781,6 @@ int main(int argc, char *argv[]) {
     if ( strcmp(mode,"-e") == 0 ) {
         //printf(" +=+=+=+=+= current mode is encode! +=+=+=+=+=\n\n");
         huffman_encoder(src_input, src_ouput);
-
         //====================//
         /*
         //printf("insert testing.........\n");
@@ -816,8 +794,6 @@ int main(int argc, char *argv[]) {
         hashTableInsert(key1, val1, 3);
         hashTableInsert(key2, val2, 3);
         hashTableInsert(key3, val3, 2);
-
-
         */
         //====================//
 
